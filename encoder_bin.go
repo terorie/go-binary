@@ -132,7 +132,7 @@ func (e *Encoder) encodeBin(rv reflect.Value, opt *option) (err error) {
 			}
 		} else {
 			l = rv.Len()
-			if err = e.WriteUVarInt(l); err != nil {
+			if err = e.WriteLength(l); err != nil {
 				return
 			}
 		}
@@ -167,7 +167,7 @@ func (e *Encoder) encodeBin(rv reflect.Value, opt *option) (err error) {
 			zlog = zlog.Named("struct")
 		}
 
-		if err = e.WriteUVarInt(keyCount); err != nil {
+		if err = e.WriteLength(keyCount); err != nil {
 			return
 		}
 

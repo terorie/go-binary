@@ -169,12 +169,11 @@ func (dec *Decoder) decodeBin(rv reflect.Value, opt *option) (err error) {
 		if opt.hasSizeOfSlice() {
 			l = opt.getSizeOfSlice()
 		} else {
-			// TODO: what type is length? Is it really Uvarint64?
-			length, err := dec.ReadUvarint64()
+			length, err := dec.ReadLength()
 			if err != nil {
 				return err
 			}
-			l = int(length)
+			l = length
 		}
 
 		if traceEnabled {
@@ -194,8 +193,7 @@ func (dec *Decoder) decodeBin(rv reflect.Value, opt *option) (err error) {
 		}
 
 	case reflect.Map:
-		// TODO: what type is length? Is it really Uvarint64?
-		l, err := dec.ReadUvarint64()
+		l, err := dec.ReadLength()
 		if err != nil {
 			return err
 		}

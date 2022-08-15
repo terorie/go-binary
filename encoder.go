@@ -122,7 +122,7 @@ func (e *Encoder) WriteLength(length int) error {
 	}
 	switch e.encoding {
 	case EncodingBin:
-		if err := e.WriteUVarInt(length); err != nil {
+		if err := e.WriteUint64(uint64(length), LE); err != nil {
 			return err
 		}
 	case EncodingBorsh:
