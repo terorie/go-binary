@@ -18,7 +18,6 @@
 package bin
 
 import (
-	"encoding/binary"
 	"fmt"
 	"reflect"
 
@@ -57,7 +56,7 @@ func (dec *Decoder) decodeBin(rv reflect.Value, opt *option) (err error) {
 	}
 
 	if opt.isOptional() {
-		isPresent, e := dec.ReadUint32(binary.LittleEndian)
+		isPresent, e := dec.ReadUint8()
 		if e != nil {
 			err = fmt.Errorf("decode: %s isPresent, %s", rv.Type().String(), e)
 			return
